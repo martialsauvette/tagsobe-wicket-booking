@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="dist/|resources/|src/action/org/jboss/seam/example/wicket/action/|src/web/org/jboss/seam/example/wicket/|src/action/org/jboss/seam/example/wicket/|src/action/org/jboss/seam/example/|src/action/org/jboss/seam/|src/web/org/jboss/seam/example/|view/css/|view/|src/web/org/jboss/seam/|src/web/org/jboss/|src/web/org/|src/web/|resources/|src/|src/action/|src/action/|src/web/" kind="src" path=""/>
+	<classpathentry kind="src" path="resources"/>
+	<classpathentry kind="src" path="src/action"/>
+	<classpathentry kind="src" path="src/web"/>
+	<classpathentry kind="var" path="SEAM_LIB/jboss-seam-wicket.jar"/>
+	<classpathentry kind="var" path="SEAM_LIB/jboss-seam.jar"/>
+	<classpathentry kind="var" path="SEAM_LIB/hibernate-validator.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="SEAM_LIB/wicket.jar"/>
+	<classpathentry kind="var" path="SEAM_LIB/slf4j-api.jar"/>
+	<classpathentry kind="var" path="SEAM_LIB/wicket-ioc.jar"/>
+	<classpathentry kind="var" path="SEAM_LIB/wicket-datetime.jar"/>
+	<classpathentry kind="var" path="SEAM_LIB/wicket-extensions.jar"/>
+	<classpathentry kind="var" path="SEAM_LIB/persistence-api.jar"/>
+	<classpathentry kind="var" path="SEAM_LIB/ejb-api.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
