@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+      http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<!-- A JPA Persistence Unit -->
+	<persistence-unit name="wicketBooking" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+		<!-- JPA entities must be registered here -->
+		<class>de.objectcode.data.dataobjects.Event</class>
+
+		<class>de.objectcode.data.dataobjects.Booking</class>
+		<class>de.objectcode.data.dataobjects.Hotel</class>
+		<class>de.objectcode.data.dataobjects.User</class>
+
+		<properties>
+	        <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+	        <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+	        <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/tagsobe" />
+	        <property name="hibernate.show_sql" value="true" />
+	        <property name="hibernate.connection.username" value="tagsobe" />
+	        <property name="hibernate.connection.password" value="tagsobe" />
+
+<!-- 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" /> -->
+<!-- 			<property name="hibernate.hbm2ddl.auto" value="create" /> -->
+<!-- 			<property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"></property> -->
+<!-- 			<property name="hibernate.connection.url" value="jdbc:hsqldb:mem:test"></property> -->
+<!-- 			<property name="hibernate.show_sql" value="true" /> -->
+
+		</properties>
+	</persistence-unit>
+
+</persistence>
