@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.objectcode</groupId>
-	<artifactId>wicket-booking-jpa</artifactId>
+	<artifactId>wicket-booking</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>Wicket Spring JPA</name>
+	<name>Wicket Spring</name>
 	<repositories>
 		<repository>
 			<id>jboss</id>
@@ -16,7 +17,14 @@
 	</repositories>
 
 	<dependencies>
-		<!--  WICKET DEPENDENCIES -->
+    
+    <dependency>
+       <groupId>javax.servlet</groupId>
+       <artifactId>servlet-api</artifactId>
+       <version>2.4</version>
+    </dependency>
+    
+		<!-- WICKET DEPENDENCIES -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket</artifactId>
@@ -28,11 +36,16 @@
 			<version>${wicket.version}</version>
 		</dependency>
 		<dependency>
-		  <groupId>org.apache.wicket</groupId>
-		  <artifactId>wicket-auth-roles</artifactId>
-		  <version>${wicket.version}</version>
-		</dependency>	
-
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-auth-roles</artifactId>
+			<version>${wicket.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-datetime</artifactId>
+			<version>${wicket.version}</version>
+		</dependency>		
+		
 		<!-- LOGGING DEPENDENCIES - LOG4J -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -45,10 +58,8 @@
 			<version>${slf4j.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		<!--
-			since we want the jcl over slf4j, we need to bump up the version of
-			slf4j-api that wicket brings in
-		-->
+		<!-- since we want the jcl over slf4j, we need to bump up the version of 
+			slf4j-api that wicket brings in -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
@@ -67,13 +78,13 @@
 			<version>1.8.0.10</version>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<!-- Spring Deps -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${org.springframework.version}</version>
-<!-- 			<scope>runtime</scope> -->
+			<!-- <scope>runtime</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -100,7 +111,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>${org.springframework.version}</version>
-			<scope>runtime</scope>
+<!-- 			<scope>runtime</scope> -->
 		</dependency>
 
 		<dependency>
@@ -121,12 +132,12 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>4.0.2.GA</version>
 			<type>jar</type>
-		</dependency>		
-		
+		</dependency>
+
 		<dependency>
-		   <groupId>mysql</groupId>
-		   <artifactId>mysql-connector-java</artifactId>
-		   <version>5.1.9</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.9</version>
 		</dependency>
 
 		<!-- Hibernate impl -->
@@ -225,9 +236,10 @@
 	<properties>
 		<slf4j.version>1.5.11</slf4j.version>
 		<wicket.version>1.4.12</wicket.version>
-<!-- 		<wicket.version>1.5.4</wicket.version> -->
+		<!-- <wicket.version>1.5.4</wicket.version> -->
 		<jetty.version>6.1.25</jetty.version>
-		<org.springframework.version>3.0.4.RELEASE</org.springframework.version>
+		<org.springframework.version>3.0.4.RELEASE
+		</org.springframework.version>
 	</properties>
 
 </project>

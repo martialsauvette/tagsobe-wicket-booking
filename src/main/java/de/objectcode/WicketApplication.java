@@ -5,9 +5,8 @@ import org.apache.wicket.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.authentication.AuthenticatedWebSession;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
-import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import de.objectcode.pages.EventPage;
 import de.objectcode.pages.Home;
@@ -26,24 +25,30 @@ public class WicketApplication extends AuthenticatedWebApplication
 	/**
 	 * Constructor
 	 */
-	private ApplicationContext ctx;
-
-	public void setApplicationContext(
-			ApplicationContext applicationContext) throws BeansException {
-			this.ctx = applicationContext;
-			}
-
-	public ApplicationContext getSpringContext(){
-		return this.ctx;
-	}
-	
-	public WicketApplication()
-	{
-	}
+//	private ApplicationContext ctx;
+//
+//	public void setApplicationContext(
+//			ApplicationContext applicationContext) throws BeansException {
+//			this.ctx = applicationContext;
+//			}
+//
+//	public ApplicationContext getSpringContext(){
+//		return this.ctx;
+//	}
+//	
+//	public WicketApplication()
+//	{
+//	}
 	
 	protected SpringComponentInjector getSpringInjector()
 	{
 		return new SpringComponentInjector(this);
+	}
+	
+	public ApplicationContext getApplicationContext()
+	{
+	return WebApplicationContextUtils
+	.getRequiredWebApplicationContext(getServletContext());
 	}
 
 	@Override
@@ -51,7 +56,7 @@ public class WicketApplication extends AuthenticatedWebApplication
 		super.init();
 
 		mountBookmarkablePage("event", EventPage.class);
-		this.ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+//		this.ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 		addComponentInstantiationListener(getSpringInjector());
 	}
 

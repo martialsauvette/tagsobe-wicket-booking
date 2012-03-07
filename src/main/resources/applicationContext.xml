@@ -36,6 +36,9 @@
 	<bean id="hotelDao" class="de.objectcode.data.dao.jpa.HotelDaoJPAImp">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
+	<bean id="bookingDao" class="de.objectcode.data.dao.jpa.BookingDaoJPAImp">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
 	
 	<bean class="de.objectcode.DataInitialiser" init-method="dataInit">
 		<property name="hotelDao" ref="hotelDao"></property>

@@ -16,7 +16,6 @@
  */
 package de.objectcode.pages;
 
-import java.security.Identity;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -41,7 +40,10 @@ import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
-import de.objectcode.action.HotelSearching;
+import de.objectcode.HotelBookingWebSession;
+import de.objectcode.action.HotelBookingAction;
+import de.objectcode.action.HotelSearchingAction;
+import de.objectcode.data.dao.interfaces.HotelDao;
 import de.objectcode.data.dataobjects.Booking;
 import de.objectcode.data.dataobjects.Hotel;
 
@@ -51,18 +53,21 @@ import de.objectcode.data.dataobjects.Hotel;
 public class Main extends WebPage
 {
 
-   @SpringBean(name="hotelSearchingAction")
-   private HotelSearching hotelSearch;
+	@SpringBean
+	private HotelDao hotelDao;
+	
+	//@SpringBean(name="hotelSearchingAction")
+   private HotelSearchingAction hotelSearch;
 //	private String hotelSearch;
 //   
 ////   @In(create=true)
-//   private List<Booking> bookings;
+   private List<Booking> bookings;
 //   
 ////   @In(create=true)
 //   private BookingList bookingList;
 //   
 ////   @In(create=true)
-//   private HotelBooking hotelBooking;
+   private HotelBookingAction hotelBooking;
 
    private DataView       hotelDataView;
    private DataView       bookedHotelDataView;
@@ -73,7 +78,11 @@ public class Main extends WebPage
    
    
    public Main(final PageParameters parameters)
-   {
+   {	   
+	  hotelSearch=  ((HotelBookingWebSession)this.getSession()).getHotelSearchingAction() ;
+	  hotelBooking=  ((HotelBookingWebSession)this.getSession()).getHotelBookingAction() ;
+      //hotelSearch = new HotelSearchingAction();
+      //hotelBooking = new HotelBookingAction();
       Template body = new Template("body");
       add(body);
       hotelSearchForm = new HotelSearchForm("searchCriteria");
@@ -123,7 +132,6 @@ public class Main extends WebPage
             item.add(new Label("hotelAddress", hotel.getAddress()));
             item.add(new Label("hotelCityStateCountry", hotel.getCity() + ", " + hotel.getState() + ", " + hotel.getCountry()));
             item.add(new Label("hotelZip", hotel.getZip()));
-            //item.add(new BookmarkablePageLink("viewHotel", org.jboss.seam.example.wicket.Hotel.class).setParameter("hotelId", hotel.getId()));
             item.add(new Link("viewHotel")
             {
 
@@ -131,8 +139,8 @@ public class Main extends WebPage
                @Override
                public void onClick()
                {
-                  //hotelBooking.selectHotel(hotel);
-                  //setResponsePage(new org.jboss.seam.example.wicket.Hotel(new PageParameters()));
+                  hotelBooking.selectHotel(hotel);
+                  setResponsePage(new de.objectcode.pages.Hotel(new PageParameters()));
                }
             
             });
@@ -263,10 +271,10 @@ public class Main extends WebPage
             protected void onSubmit(AjaxRequestTarget target, Form form)
             {
                target.addComponent(messages);
-               hotelSearch.find();
-//               hotelDataView.setCurrentPage(0);
-//               hotelDataView.setItemsPerPage(getPageSize());
-//               hotelDataView.modelChanged();
+               hotelSearch.setHotels(hotelDao.find(hotelSearch.getSearchPattern()));
+               hotelDataView.setCurrentPage(0);
+               hotelDataView.setItemsPerPage(getPageSize());
+               hotelDataView.modelChanged();
                hotels.modelChanged();
                target.addComponent(hotels);
                target.addComponent(noHotelsFound);
@@ -286,7 +294,7 @@ public class Main extends WebPage
       {
 //         hotelDataView.setCurrentPage(0);
 //         hotelDataView.setItemsPerPage(getPageSize());
-         hotelSearch.find();
+    	  hotelSearch.setHotels(hotelDao.find(hotelSearch.getSearchPattern()));
       }
 
    }

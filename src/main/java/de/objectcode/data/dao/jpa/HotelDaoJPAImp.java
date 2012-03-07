@@ -3,15 +3,10 @@ package de.objectcode.data.dao.jpa;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
-import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaCallback;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import de.objectcode.data.dao.interfaces.HotelDao;

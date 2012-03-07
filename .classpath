@@ -4,18 +4,21 @@
   <classpathentry kind="src" path="src/main/java"/>
   <classpathentry kind="src" path="src/main/resources" including="**" excluding="**/*.java|**/*.java"/>
   <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="var" path="M2_REPO/javax/servlet/servlet-api/2.4/servlet-api-2.4.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar" sourcepath="M2_REPO/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/xml/bind/jaxb-api/2.1/jaxb-api-2.1.jar" sourcepath="M2_REPO/javax/xml/bind/jaxb-api/2.1/jaxb-api-2.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar" sourcepath="M2_REPO/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/activation/activation/1.1/activation-1.1.jar" sourcepath="M2_REPO/javax/activation/activation/1.1/activation-1.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/transaction/jta/1.1/jta-1.1.jar" sourcepath="M2_REPO/javax/transaction/jta/1.1/jta-1.1-sources.jar"/>
-  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/wicket/wicket/1.4.12/wicket-1.4.12.jar" sourcepath="M2_REPO/org/apache/wicket/wicket/1.4.12/wicket-1.4.12-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.5.11/slf4j-api-1.5.11.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/wicket/wicket-spring/1.4.12/wicket-spring-1.4.12.jar" sourcepath="M2_REPO/org/apache/wicket/wicket-spring/1.4.12/wicket-spring-1.4.12-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/wicket/wicket-ioc/1.4.12/wicket-ioc-1.4.12.jar" sourcepath="M2_REPO/org/apache/wicket/wicket-ioc/1.4.12/wicket-ioc-1.4.12-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/cglib/cglib-nodep/2.1_3/cglib-nodep-2.1_3.jar" sourcepath="M2_REPO/cglib/cglib-nodep/2.1_3/cglib-nodep-2.1_3-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/wicket/wicket-auth-roles/1.4.12/wicket-auth-roles-1.4.12.jar" sourcepath="M2_REPO/org/apache/wicket/wicket-auth-roles/1.4.12/wicket-auth-roles-1.4.12-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/wicket/wicket-datetime/1.4.12/wicket-datetime-1.4.12.jar"/>
+  <classpathentry kind="var" path="M2_REPO/joda-time/joda-time/1.6/joda-time-1.6.jar" sourcepath="M2_REPO/joda-time/joda-time/1.6/joda-time-1.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-log4j12/1.5.11/slf4j-log4j12-1.5.11.jar"/>
   <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.14/log4j-1.2.14.jar" sourcepath="M2_REPO/log4j/log4j/1.2.14/log4j-1.2.14-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/slf4j/jcl-over-slf4j/1.5.11/jcl-over-slf4j-1.5.11.jar" sourcepath="M2_REPO/org/slf4j/jcl-over-slf4j/1.5.11/jcl-over-slf4j-1.5.11-sources.jar"/>

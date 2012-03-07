@@ -4,34 +4,21 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-import de.objectcode.data.dao.interfaces.HotelDao;
 import de.objectcode.data.dataobjects.Hotel;
 
 
 @SuppressWarnings("serial")
-@Component(value="hotelSearchingAction")
-//@Scope("session")
-public class HotelSearchingAction implements HotelSearching, Serializable
+public class HotelSearchingAction implements Serializable
 {
-	@Autowired
-	private HotelDao hotelDao;
    
-   private String searchString;
+   private String searchString="";
    
    private List<Hotel> hotels = new ArrayList<Hotel>();
    
-   public void find()
-   {
-	   hotels = hotelDao.find(searchString);
-   }     
+//   public void find()
+//   {
+//	   hotels = hotelDao.find(searchString);
+//   }     
    
    public String getSearchPattern()
    {
@@ -54,6 +41,8 @@ public class HotelSearchingAction implements HotelSearching, Serializable
       return hotels;
    }
    
-//   @Remove
-   public void destroy() {}
+public void setHotels(List<Hotel> hotels) {
+	this.hotels = hotels;
+}
+
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 import de.objectcode.data.dao.interfaces.HotelDao;
 import de.objectcode.data.dao.interfaces.UserDao;
-import de.objectcode.data.dataobjects.Event;
 import de.objectcode.data.dataobjects.Hotel;
 import de.objectcode.data.dataobjects.User;
 
