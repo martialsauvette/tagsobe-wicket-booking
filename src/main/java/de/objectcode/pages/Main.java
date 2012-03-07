@@ -16,6 +16,7 @@
  */
 package de.objectcode.pages;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -43,6 +44,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import de.objectcode.HotelBookingWebSession;
 import de.objectcode.action.HotelBookingAction;
 import de.objectcode.action.HotelSearchingAction;
+import de.objectcode.data.dao.interfaces.BookingDao;
 import de.objectcode.data.dao.interfaces.HotelDao;
 import de.objectcode.data.dataobjects.Booking;
 import de.objectcode.data.dataobjects.Hotel;
@@ -55,22 +57,27 @@ public class Main extends WebPage
 
 	@SpringBean
 	private HotelDao hotelDao;
+
+	@SpringBean
+	private BookingDao bookingDao;
 	
+
+
 	//@SpringBean(name="hotelSearchingAction")
    private HotelSearchingAction hotelSearch;
 //	private String hotelSearch;
 //   
 ////   @In(create=true)
-   private List<Booking> bookings;
+   private List<Booking> bookings=new ArrayList<Booking>();
 //   
 ////   @In(create=true)
-//   private BookingList bookingList;
+//   private BookingListAction bookingList;
 //   
 ////   @In(create=true)
    private HotelBookingAction hotelBooking;
 
-   private DataView       hotelDataView;
-   private DataView       bookedHotelDataView;
+   private DataView hotelDataView;
+   private DataView bookedHotelDataView;
    private HotelSearchForm hotelSearchForm;
    private WebMarkupContainer hotels;
    private Component noHotelsFound;
@@ -79,10 +86,13 @@ public class Main extends WebPage
    
    public Main(final PageParameters parameters)
    {	   
-	  hotelSearch=  ((HotelBookingWebSession)this.getSession()).getHotelSearchingAction() ;
-	  hotelBooking=  ((HotelBookingWebSession)this.getSession()).getHotelBookingAction() ;
-      //hotelSearch = new HotelSearchingAction();
-      //hotelBooking = new HotelBookingAction();
+	  hotelSearch = ((HotelBookingWebSession)this.getSession()).getHotelSearchingAction();
+	  hotelBooking = ((HotelBookingWebSession)this.getSession()).getHotelBookingAction();
+	  ((HotelBookingWebSession)this.getSession()).setBookings(
+			  bookingDao.findBookingsByUserId(((HotelBookingWebSession)this.getSession()).getUser().getUsername()));
+	  bookings=((HotelBookingWebSession)this.getSession()).getBookings();
+
+
       Template body = new Template("body");
       add(body);
       hotelSearchForm = new HotelSearchForm("searchCriteria");
@@ -174,13 +184,13 @@ public class Main extends WebPage
       bookedHotelDataView = new DataView("bookedHotel", new SimpleDataProvider()
       {
          public Iterator iterator(int from, int count)
-         {return null;
-            //return bookings.subList(from, from + count).iterator();
+         {
+            return bookings.subList(from, from + count).iterator();
          }
 
          public int size()
-         { return 0;
-            //return bookings.size();
+         { 
+        	 return bookings.size();
          }
          
          
@@ -204,7 +214,9 @@ public class Main extends WebPage
                @Override
                public void onClick()
                {
-                  //bookingList.cancel(booking);
+                  bookingDao.cancelBooking(booking);
+            	  bookings = bookingDao.findBookingsByUserId(((HotelBookingWebSession)this.getSession()).getUser().getUsername());
+
                }
                
             });
@@ -213,8 +225,7 @@ public class Main extends WebPage
          @Override
          public boolean isVisible()
          {
-        	 return false;
-             // return Identity.instance().isLoggedIn() && bookings.size() > 0;
+              return  bookings.size() > 0;
          }
 
       };
@@ -251,7 +262,6 @@ public class Main extends WebPage
       public HotelSearchForm(String id)
       {
          super(id);
-//  	   	hotelSearch = new HotelSearchingAction();
          add(new TextField("searchString", new PropertyModel(this,"searchString")
          {
             
@@ -292,9 +302,9 @@ public class Main extends WebPage
       @Override
       protected void onSubmit()
       {
-//         hotelDataView.setCurrentPage(0);
-//         hotelDataView.setItemsPerPage(getPageSize());
-    	  hotelSearch.setHotels(hotelDao.find(hotelSearch.getSearchPattern()));
+         hotelDataView.setCurrentPage(0);
+         hotelDataView.setItemsPerPage(getPageSize());
+    	 hotelSearch.setHotels(hotelDao.find(hotelSearch.getSearchPattern()));
       }
 
    }

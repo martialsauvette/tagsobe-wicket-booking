@@ -1,5 +1,8 @@
 package de.objectcode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.wicket.Application;
 import org.apache.wicket.Request;
 import org.apache.wicket.authentication.AuthenticatedWebSession;
@@ -10,6 +13,7 @@ import org.apache.wicket.proxy.LazyInitProxyFactory;
 import de.objectcode.action.HotelBookingAction;
 import de.objectcode.action.HotelSearchingAction;
 import de.objectcode.data.dao.interfaces.UserDao;
+import de.objectcode.data.dataobjects.Booking;
 import de.objectcode.data.dataobjects.User;
 
 @SuppressWarnings("serial")
@@ -42,7 +46,18 @@ public class HotelBookingWebSession extends AuthenticatedWebSession {
 		}
 		return hotelBooking;
 	}
+	   
+	private List<Booking> bookings;
 
+	public  List<Booking>  getBookings(){
+		if (bookings==null){
+			bookings = new ArrayList<Booking>();
+		}
+		return bookings;
+	}
+	public void setBookings(List<Booking> toSet){
+		this.bookings=toSet;
+	}
 
 	private User user;
 

@@ -14,74 +14,60 @@ import de.objectcode.data.dataobjects.Booking;
 import de.objectcode.data.dataobjects.Hotel;
 import de.objectcode.data.dataobjects.User;
 
+public class HotelBookingAction implements Serializable {
 
-public class HotelBookingAction  implements Serializable
-{
-@PersistenceContext(type=EXTENDED)
-   private EntityManager em;
-   
-   private User user;
-   
+	private User user;
 
-   private Hotel hotel;
-   
+	private Hotel hotel;
 
-   private Booking booking;
-   
+	private Booking booking;
 
-//   private StatusMessages statusMessages;
+	// private StatusMessages statusMessages;
 
-private Log log;
-   
-   private boolean bookingValid;
-   
-   public void selectHotel(Hotel hotel)
-   {
- //     StatusMessages.instance().add("foo");
-      this.hotel = hotel;
-   }
-   
-   public void bookHotel()
-   {      
-      booking = new Booking(hotel, user);
-      Calendar calendar = Calendar.getInstance();
-      booking.setCheckinDate( calendar.getTime() );
-      calendar.add(Calendar.DAY_OF_MONTH, 1);
-      booking.setCheckoutDate( calendar.getTime() );
-   }
-   
-   public void setBookingDetails()
-   {
-      Calendar calendar = Calendar.getInstance();
-      calendar.add(Calendar.DAY_OF_MONTH, -1);
-      if ( booking.getCheckinDate().before( calendar.getTime() ) )
-      {
-    	  //statusMessages.addToControl("checkinDate", "Check in date must be a future date");
-         bookingValid=false;
-      }
-      else if ( !booking.getCheckinDate().before( booking.getCheckoutDate() ) )
-      {
-    	  //statusMessages.addToControl("checkoutDate", "Check out date must be later than check in date");
-         bookingValid=false;
-      }
-      else
-      {
-         bookingValid=true;
-      }
-   }
-   
-   public boolean isBookingValid()
-   {
-      return bookingValid;
-   }
-   
-   public void confirm()
-   {
-      em.persist(booking);
-      //StatusMessages.instance().add("Thank you, #{user.name}, your confimation number for #{hotel.name} is #{booking.id}");
-      log.info("New booking: #{booking.id} for #{user.username}");
-   }
-   
+	private Log log;
+
+	private boolean bookingValid;
+
+	public void selectHotel(Hotel hotel) {
+		// StatusMessages.instance().add("foo");
+		this.hotel = hotel;
+	}
+
+	public void bookHotel() {
+		booking = new Booking(hotel, user);
+		Calendar calendar = Calendar.getInstance();
+		booking.setCheckinDate(calendar.getTime());
+		calendar.add(Calendar.DAY_OF_MONTH, 1);
+		booking.setCheckoutDate(calendar.getTime());
+	}
+
+	public void setBookingDetails() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DAY_OF_MONTH, -1);
+		if (booking.getCheckinDate().before(calendar.getTime())) {
+			// statusMessages.addToControl("checkinDate",
+			// "Check in date must be a future date");
+			bookingValid = false;
+		} else if (!booking.getCheckinDate().before(booking.getCheckoutDate())) {
+			// statusMessages.addToControl("checkoutDate",
+			// "Check out date must be later than check in date");
+			bookingValid = false;
+		} else {
+			bookingValid = true;
+		}
+	}
+
+	public boolean isBookingValid() {
+		return bookingValid;
+	}
+
+	// public void confirm()
+	// {
+	// em.persist(booking);
+	// //StatusMessages.instance().add("Thank you, #{user.name}, your confimation number for #{hotel.name} is #{booking.id}");
+	// log.info("New booking: #{booking.id} for #{user.username}");
+	// }
+
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -92,6 +78,6 @@ private Log log;
 
 	public Booking getBooking() {
 		return booking;
-}
- 
+	}
+
 }

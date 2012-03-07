@@ -32,7 +32,7 @@ public class BookingDaoJPAImp  extends AbstractDaoJPAImpl<Booking> implements Bo
 	public List<Booking> findBookingsByUserId(final String userName) {
 		return getJpaTemplate().execute(new JpaCallback<List<Booking>>() {
 			public List<Booking> doInJpa(EntityManager em) throws PersistenceException {
-				TypedQuery<Booking> query = em.createQuery("select b from Booking b where b.user.username = :userName", Booking.class);
+				TypedQuery<Booking> query = em.createQuery("select b from Booking b where b.user.username = :userName order by b.checkinDate", Booking.class);
 				query.setParameter("userName", userName);
 				return query.getResultList();
 			}
@@ -49,6 +49,18 @@ public class BookingDaoJPAImp  extends AbstractDaoJPAImpl<Booking> implements Bo
 		getJpaTemplate().execute(new JpaCallback<Booking>() {
 	        public Booking doInJpa(EntityManager entityManager) throws PersistenceException {
 	            entityManager.persist(booking);
+	            entityManager.flush();
+	            return null;
+	        }
+		});
+		
+	}
+	@Transactional
+	public void cancelBooking(final Booking booking) {
+		getJpaTemplate().execute(new JpaCallback<Booking>() {
+	        public Booking doInJpa(EntityManager entityManager) throws PersistenceException {
+	        	Booking toRemove = entityManager.find(Booking.class, booking.getId());
+	            entityManager.remove(toRemove);
 	            entityManager.flush();
 	            return null;
 	        }
