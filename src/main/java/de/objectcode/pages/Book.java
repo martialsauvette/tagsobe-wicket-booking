@@ -1,5 +1,7 @@
 package de.objectcode.pages;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import org.apache.wicket.PageParameters;
 import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.extensions.yui.calendar.DateField;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
@@ -27,7 +30,7 @@ public class Book extends WebPage
    private static final List<String> bedOptionsDisplayValues = Arrays.asList("One king-sized bed", "Two double beds", "Three beds");
    private static final List<Integer> bedOptions = Arrays.asList(1, 2, 3);
    private static final List<String> monthOptions = Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
-   private static final List<Integer> yearOptions = Arrays.asList(2008, 2015);
+   private static final List<Integer> yearOptions = Arrays.asList(2006, 2007, 2008, 2009, 2010, 2011, 2012);
    
    //@In
    private Booking booking;
@@ -100,7 +103,22 @@ public class Book extends WebPage
          }), new PropertyModel(booking, "smoking"), false));
          add(new FormInputBorder("creditCardBorder", "Credit Card #", new TextField("creditCard").setRequired(true), new PropertyModel(booking, "creditCard")));
          add(new FormInputBorder("creditCardNameBorder", "Credit Card Name", new TextField("creditCardName").setRequired(true), new PropertyModel(booking, "creditCardName")));
-         add(new FormInputBorder("creditCardExpiryBorder", "Credit Card Expiry", new DropDownChoice("creditCardExpiryMonth", monthOptions).setRequired(true), new PropertyModel(booking, "creditCardExpiryMonth")).add(new DropDownChoice("creditCardExpiryYear", yearOptions).setRequired(true), new PropertyModel(booking, "creditCardExpiryYear")));
+         
+         DropDownChoice<Integer> creditCardExpiryYear= new DropDownChoice<Integer>("creditCardExpiryYear", yearOptions, new IChoiceRenderer<Integer>(){
+	           public Object getDisplayValue(Integer object)
+	           {              
+	               return object.toString();
+	           }
+	
+	           public String getIdValue(Integer object, int index)
+	           {
+	               return object.toString();
+	           }
+      	 });
+         
+         add(new FormInputBorder("creditCardExpiryBorder", "Credit Card Expiry", 
+        		 new DropDownChoice("creditCardExpiryMonth", monthOptions).setRequired(true), new PropertyModel(booking, "creditCardExpiryMonth"))
+         .add(creditCardExpiryYear.setRequired(true), new PropertyModel(booking, "creditCardExpiryYear")));
          add(new Link("cancel")
          {
 
@@ -112,8 +130,7 @@ public class Book extends WebPage
             
          });          
       }
-      
-      
+          
       
       @Override
       protected void onSubmit()
@@ -124,8 +141,6 @@ public class Book extends WebPage
             setResponsePage(new Confirm(new PageParameters()));
          }
       }
-
-	   
 	}
 	
 }
