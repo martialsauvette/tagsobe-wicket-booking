@@ -2,6 +2,7 @@ package de.objectcode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.wicket.Application;
 import org.apache.wicket.Request;
@@ -27,6 +28,7 @@ public class HotelBookingWebSession extends AuthenticatedWebSession {
 	public HotelBookingWebSession(Request request) {
 		super(request);
 		hotelSearch = new HotelSearchingAction();
+		setLocale(Locale.ENGLISH);
 	}
 
 	private HotelSearchingAction hotelSearch;
