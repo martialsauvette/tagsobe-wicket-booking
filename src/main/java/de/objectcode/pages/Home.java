@@ -22,6 +22,7 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 
@@ -29,23 +30,9 @@ import de.objectcode.data.dataobjects.User;
 
 public class Home extends WebPage {
 
-	// @In
-	// private Identity identity;
-
-	// @Logger
-	// private Log log;
 	private User user;
-	// private TextField username;
-	// private PasswordTextField password;
-	private static final long serialVersionUID = 1L;
 
-	// public Home(final PageParameters parameters)
-	// {
-	// Template body = new Template("body");
-	// add(body);
-	//
-	// // body.add(new SignInPanel("signInPanel"));
-	// }
+	private static final long serialVersionUID = 1L;
 
 	public Home(final PageParameters parameters) {
 		this.user = new User();
@@ -56,10 +43,10 @@ public class Home extends WebPage {
 		public LoginForm(String id) {
 			super(id);
 			add(new TextField("username", new PropertyModel(user, "username")));
-			add(new PasswordTextField("password", new PropertyModel(user,
-					"password")));
-			// add(new BookmarkablePageLink("register", Register.class));
-			add(new FeedbackPanel("messages"));
+			add(new PasswordTextField("password", new PropertyModel(user,"password")));
+	        add(new BookmarkablePageLink("register", Register.class));
+	        add(new FeedbackPanel("messages"));
+
 		}
 
 		@Override
@@ -68,11 +55,9 @@ public class Home extends WebPage {
 				 
 				AuthenticatedWebSession.get().signIn(user.getUsername(), user.getPassword());
 				if (AuthenticatedWebSession.get().isSignedIn()){
-					setResponsePage(Main.class);
-					System.out.println("########## logged in ##############");
+					setResponsePage(Main.class);					
 				} else {
-					setResponsePage(Home.class);
-					System.out.println("########## Password falsch ##############");
+					setResponsePage(Home.class);					
 				}
 			} catch (Exception e) {
 				error("Login failed");

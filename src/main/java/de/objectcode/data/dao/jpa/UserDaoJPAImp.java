@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.orm.jpa.JpaCallback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,4 +62,37 @@ public class UserDaoJPAImp extends AbstractDaoJPAImpl<User> implements UserDao {
 			}
 		});
 	}
+	@Transactional
+	public User findUserByUserName(final String userName) {
+		return getJpaTemplate().execute(new JpaCallback<User>() {
+			public User doInJpa(EntityManager em) throws PersistenceException {
+				TypedQuery<User> query = em.createQuery("select u from User u where u.username = :userName", User.class);
+				query.setParameter("userName", userName);
+				return query.getSingleResult();
+			}
+		});
+	}
+
+	public boolean userAlreadyExist(final String userName) {
+		try{
+			return  findUserByUserName(userName)!=null;	
+		}catch (EmptyResultDataAccessException e) {
+			return false;
+		}
+		
+	}
+	
+	
+	@Transactional
+	public void createUser(final User user){
+		getJpaTemplate().execute(new JpaCallback<User>() {
+	        public User doInJpa(EntityManager entityManager) throws PersistenceException {
+	            entityManager.persist(user);
+	            entityManager.flush();
+	            return null;
+	        }
+		});
+		
+	}
+
 }
