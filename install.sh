@@ -39,7 +39,7 @@ mvn install -Dmaven.test.skip=true
 
 export TOMCAT_HOME=/usr/share/tomcat6
 
-sudo cp target/tagsobe-wicket-booking.war $TOMCAT_HOME/webapps/booking.war
+sudo cp target/wicket-booking-1.0-SNAPSHOT.war $TOMCAT_HOME/webapps/booking.war
 
 sudo service tomcat6 start
 
@@ -50,7 +50,7 @@ mkdir log
 touch ~/log/run.log
 
 cd ~/tagbrowser/dist
-java  -Dfmt=java -jar tagsobe.jar http://localhost:8080/tagsobe-wicket-booking/signin | tee ~/log/run.log
+java  -Dfmt=java -jar tagsobe.jar http://localhost:8080/booking/ | tee ~/log/run.log
 
 sudo service tomcat6 stop
 
