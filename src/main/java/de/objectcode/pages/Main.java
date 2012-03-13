@@ -88,9 +88,9 @@ public class Main extends WebPage
    {	   
 	  hotelSearch = ((HotelBookingWebSession)this.getSession()).getHotelSearchingAction();
 	  hotelBooking = ((HotelBookingWebSession)this.getSession()).getHotelBookingAction();
-	  ((HotelBookingWebSession)this.getSession()).setBookings(
-			  bookingDao.findBookingsByUserId(((HotelBookingWebSession)this.getSession()).getUser().getUsername()));
-	  bookings=((HotelBookingWebSession)this.getSession()).getBookings();
+//	  ((HotelBookingWebSession)this.getSession()).setBookings(
+//			  bookingDao.findBookingsByUserId(((HotelBookingWebSession)this.getSession()).getUser().getUsername()));
+//	  bookings=((HotelBookingWebSession)this.getSession()).getBookings();
 
 
       Template body = new Template("body");
@@ -215,7 +215,7 @@ public class Main extends WebPage
                public void onClick()
                {
                   bookingDao.cancelBooking(booking);
-            	  bookings = bookingDao.findBookingsByUserId(((HotelBookingWebSession)this.getSession()).getUser().getUsername());
+            	  //bookings = bookingDao.findBookingsByUserId(((HotelBookingWebSession)this.getSession()).getUser().getUsername());
 
                }
                
