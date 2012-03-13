@@ -53,8 +53,8 @@ public class Confirm extends WebPage
          public void onClick()
          {
         	 bookingDao.createBooking(booking);
-//        	 ((HotelBookingWebSession)this.getSession()).setBookings(
-//       			  bookingDao.findBookingsByUserId(((HotelBookingWebSession)this.getSession()).getUser().getUsername()));
+        	 ((HotelBookingWebSession)this.getSession()).setBookings(
+       			  bookingDao.findBookingsByUserId(((HotelBookingWebSession)this.getSession()).getUser().getUsername()));
             setResponsePage(Main.class);
          }
       });

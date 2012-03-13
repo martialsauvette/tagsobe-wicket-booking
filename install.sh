@@ -35,7 +35,7 @@ git clone git://github.com/martialsauvette/tagsobe-wicket-booking.git
 
 cd
 cd tagsobe-wicket-booking
-mvn install -Dmaven.test.skip=true
+mvn clean install -Dmaven.test.skip=true
 
 export TOMCAT_HOME=/usr/share/tomcat6
 
@@ -56,6 +56,7 @@ sudo service tomcat6 stop
 
 mail -s "tagsobe tagsobe-wicket-booking result" sauvette@objectcode.de <  ~/log/run.log
 
+JAVA_OPTS="${JAVA_OPTS} -Xmx1024m"
 
 cd
 
