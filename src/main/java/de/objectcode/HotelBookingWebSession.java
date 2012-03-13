@@ -100,7 +100,7 @@ public class HotelBookingWebSession extends AuthenticatedWebSession {
 		boolean userExist =userDao.authenticate(username, password);
 		if(userExist){
 			this.user = userDao.findUserByUserNameAndPassword(username, password);
-			setBookings(bookingDao.findBookingsByUserId(getUser().getUsername()));
+//			setBookings(bookingDao.findBookingsByUserId(getUser().getUsername()));
 		}
 		return userExist;
 	}
