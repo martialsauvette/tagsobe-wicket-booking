@@ -11,11 +11,8 @@ import de.objectcode.data.dataobjects.User;
 public class Template extends Border
 {
 
-  //@In 
+
    private User user;
-   
-  // @In
-  // private Identity identity;
    
    public Template(String id)
    {
@@ -26,7 +23,6 @@ public class Template extends Border
 //         @Override
 //         public void onClick()
 //         {
-//            //Manager.instance().leaveConversation();
 //            setResponsePage(Main.class);
 //         }
 //      });
@@ -35,7 +31,6 @@ public class Template extends Border
 //         @Override
 //         public void onClick()
 //         {
-//            //Manager.instance().leaveConversation();
 //            //setResponsePage(Password.class);
 //         }
 //      });
@@ -50,7 +45,7 @@ public class Template extends Border
       });
 
       add(new Label("userName", user.getName()));
-//      add(new Label("userName", "HOURA!!!"));
+
    }
 
 }

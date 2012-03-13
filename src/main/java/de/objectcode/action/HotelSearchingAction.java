@@ -14,11 +14,7 @@ public class HotelSearchingAction implements Serializable
    private String searchString="";
    
    private List<Hotel> hotels = new ArrayList<Hotel>();
-   
-//   public void find()
-//   {
-//	   hotels = hotelDao.find(searchString);
-//   }     
+     
    
    public String getSearchPattern()
    {

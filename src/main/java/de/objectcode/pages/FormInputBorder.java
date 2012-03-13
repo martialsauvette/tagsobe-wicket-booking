@@ -44,21 +44,10 @@ public class FormInputBorder extends Border
    {
       this(id, label, component, model, ajaxValidate, model.getTarget().getClass(), model.getPropertyExpression());
    }
-   
-//   public FormInputBorder(String id, String label, FormComponent component, SeamPropertyModel model, boolean ajaxValidate)
-//   {
-//      this(id, label, component, model, ajaxValidate, model.getTarget().getClass(), model.getPropertyExpression());
-//   }
-   
    public FormInputBorder(String id, String label, FormComponent component, PropertyModel model)
    {
       this(id, label, component, model, true, model.getTarget().getClass(), model.getPropertyExpression());
    }
-   
-//   public FormInputBorder(String id, String label, FormComponent component, SeamPropertyModel model)
-//   {
-//      this(id, label, component, model, true, model.getTarget().getClass(), model.getPropertyExpression());
-//   }
    
    /**
     * Create a new form input border which validates
@@ -96,7 +85,6 @@ public class FormInputBorder extends Border
    
    public FormInputBorder add(FormComponent component, IModel model, Class modelClass, String expression)
    {
-//      component.add(new ModelValidator(modelClass, expression));
       component.setModel(model);
       component.setLabel(labelModel);
       add(component);

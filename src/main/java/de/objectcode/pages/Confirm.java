@@ -22,10 +22,10 @@ public class Confirm extends WebPage
    @SpringBean
 	private BookingDao bookingDao;
    
-   //@In
+
    private Booking booking;
    
-   //@In(create=true)
+
    private HotelBookingAction hotelBooking;
 
 	public Confirm(final PageParameters parameters)
@@ -50,12 +50,11 @@ public class Confirm extends WebPage
       body.add(new Link("confirm")
       {
          @Override
-         //@RaiseEvent("bookingConfirmed")
          public void onClick()
          {
         	 bookingDao.createBooking(booking);
-//        	 ((HotelBookingWebSession)this.getSession()).setBookings(
-//       			  bookingDao.findBookingsByUserId(((HotelBookingWebSession)this.getSession()).getUser().getUsername()));
+        	 ((HotelBookingWebSession)this.getSession()).setBookings(
+       			  bookingDao.findBookingsByUserId(((HotelBookingWebSession)this.getSession()).getUser().getUsername()));
             setResponsePage(Main.class);
          }
       });
@@ -64,7 +63,6 @@ public class Confirm extends WebPage
          @Override
          public void onClick()
          {
-            //hotelBooking.cancel();
             setResponsePage(Main.class);
          }
          

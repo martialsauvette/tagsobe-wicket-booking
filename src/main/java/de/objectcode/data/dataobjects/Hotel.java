@@ -1,4 +1,3 @@
-//$Id: Hotel.java,v 1.13 2007/06/27 00:06:49 gavin Exp $
 package de.objectcode.data.dataobjects;
 
 import java.io.Serializable;

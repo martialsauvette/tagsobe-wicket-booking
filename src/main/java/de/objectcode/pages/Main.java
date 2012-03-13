@@ -55,25 +55,16 @@ import de.objectcode.data.dataobjects.Hotel;
 public class Main extends WebPage
 {
 
-	@SpringBean
-	private HotelDao hotelDao;
+   @SpringBean
+   private HotelDao hotelDao;
 
-	@SpringBean
-	private BookingDao bookingDao;
-	
+   @SpringBean
+   private BookingDao bookingDao;
 
-
-	//@SpringBean(name="hotelSearchingAction")
    private HotelSearchingAction hotelSearch;
-//	private String hotelSearch;
-//   
-////   @In(create=true)
+
    private List<Booking> bookings=new ArrayList<Booking>();
-//   
-////   @In(create=true)
-//   private BookingListAction bookingList;
-//   
-////   @In(create=true)
+
    private HotelBookingAction hotelBooking;
 
    private DataView hotelDataView;
@@ -90,7 +81,7 @@ public class Main extends WebPage
 	  hotelBooking = ((HotelBookingWebSession)this.getSession()).getHotelBookingAction();
 //	  ((HotelBookingWebSession)this.getSession()).setBookings(
 //			  bookingDao.findBookingsByUserId(((HotelBookingWebSession)this.getSession()).getUser().getUsername()));
-//	  bookings=((HotelBookingWebSession)this.getSession()).getBookings();
+	  bookings=((HotelBookingWebSession)this.getSession()).getBookings();
 
 
       Template body = new Template("body");
@@ -112,12 +103,12 @@ public class Main extends WebPage
           */
          @Override
          public boolean isVisible()
-         {//return true;
+         {
             return  hotelSearch.getHotels().size() == 0;
          }
       };
       body.add(noHotelsFound.setOutputMarkupId(true));
-      hotelDataView = new DataView("hotel", new SimpleDataProvider() // A DataProvider adapts between your data and Wicket's internal representation
+      hotelDataView = new DataView("hotel", new SimpleDataProvider() 
       {
          public Iterator iterator(int from, int count)
          {
@@ -145,7 +136,6 @@ public class Main extends WebPage
             item.add(new Link("viewHotel")
             {
 
-//							 @Begin
                @Override
                public void onClick()
                {
@@ -215,7 +205,7 @@ public class Main extends WebPage
                public void onClick()
                {
                   bookingDao.cancelBooking(booking);
-            	  //bookings = bookingDao.findBookingsByUserId(((HotelBookingWebSession)this.getSession()).getUser().getUsername());
+            	  bookings = bookingDao.findBookingsByUserId(((HotelBookingWebSession)this.getSession()).getUser().getUsername());
 
                }
                
@@ -234,8 +224,8 @@ public class Main extends WebPage
       {
          @Override
          public boolean isVisible()
-         {return false;
-           // return Identity.instance().isLoggedIn() && bookings.size() == 0;
+         {
+           return bookings.size() == 0;
          }
       });
    }

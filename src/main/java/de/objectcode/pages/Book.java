@@ -32,10 +32,10 @@ public class Book extends WebPage
    private static final List<String> monthOptions = Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
    private static final List<Integer> yearOptions = Arrays.asList(2006, 2007, 2008, 2009, 2010, 2011, 2012);
    
-   //@In
+
    private Booking booking;
    
-   //@In(create=true)
+
    private HotelBookingAction hotelBooking;
 
 	public Book(final PageParameters parameters)

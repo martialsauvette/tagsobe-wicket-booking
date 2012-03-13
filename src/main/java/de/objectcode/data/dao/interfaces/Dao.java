@@ -4,10 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import de.objectcode.data.dataobjects.DomainObject;
-/**
- * @author Richard Wilkinson - richard.wilkinson@jweekend.com
- *
- */
+
 public interface Dao<T extends DomainObject>
 {
 	public void delete(T o);

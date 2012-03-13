@@ -75,7 +75,6 @@ public class Register extends WebPage
 		protected void onSubmit() {
 			if (userDao.userAlreadyExist(user.getName())) {
 				error("Username " +user.getName()+ " already exists");
-				//error("Username already exists");
 				user.setPassword("");
 				verify = "";
 				setResponsePage(errorPage);

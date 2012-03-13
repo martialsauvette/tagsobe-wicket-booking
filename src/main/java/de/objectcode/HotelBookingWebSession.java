@@ -13,6 +13,7 @@ import org.apache.wicket.proxy.LazyInitProxyFactory;
 
 import de.objectcode.action.HotelBookingAction;
 import de.objectcode.action.HotelSearchingAction;
+import de.objectcode.data.dao.interfaces.BookingDao;
 import de.objectcode.data.dao.interfaces.UserDao;
 import de.objectcode.data.dataobjects.Booking;
 import de.objectcode.data.dataobjects.User;
@@ -78,6 +79,17 @@ public class HotelBookingWebSession extends AuthenticatedWebSession {
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
+	
+	private BookingDao bookingDao= (BookingDao) LazyInitProxyFactory.createProxy(
+			BookingDao.class, new IProxyTargetLocator() {
+				public Object locateProxyTarget() {
+					return ((WicketApplication) Application.get())
+							.getApplicationContext().getBean("bookingDao");
+				}
+			});
+	public void setBookingDao(BookingDao bookingDao){
+		this.bookingDao=bookingDao;
+	}
 
 	/**
 	 * @see org.apache.wicket.authentication.AuthenticatedWebSession#authenticate(java.lang.String,
@@ -85,8 +97,12 @@ public class HotelBookingWebSession extends AuthenticatedWebSession {
 	 */
 	@Override
 	public boolean authenticate(final String username, final String password) {
-		this.user = userDao.findUserByUserNameAndPassword(username, password);
-		return userDao.authenticate(username, password);
+		boolean userExist =userDao.authenticate(username, password);
+		if(userExist){
+			this.user = userDao.findUserByUserNameAndPassword(username, password);
+			setBookings(bookingDao.findBookingsByUserId(getUser().getUsername()));
+		}
+		return userExist;
 	}
 
 	/**

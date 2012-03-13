@@ -1,4 +1,3 @@
-//$Id: Booking.java,v 1.15 2007/06/27 00:06:49 gavin Exp $
 package de.objectcode.data.dataobjects;
 
 import java.io.Serializable;
