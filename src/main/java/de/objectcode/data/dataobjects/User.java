@@ -50,7 +50,7 @@ public class User extends DomainObject implements Serializable
    }
    
    @Id
-   @Size(min=4, max=15)
+   @Size(min=4, max=25)
    @Pattern(regexp="^\\w*$", message="not a valid username")
    public String getUsername()
    {

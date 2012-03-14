@@ -10,13 +10,6 @@ sudo yum -y install mysql-server
 sudo yum -y install ant
 
 
-git clone git://github.com/martialsauvette/tagbrowser.git
-cd tagbrowser
-#get the revision for wicket
-git checkout a56adc391225c0546d7c4e6173ace7e1c864f25a
-ant
-cd
-
 sudo service mysqld start
 mysqladmin -u root create tagsobe
 mysql -u root tagsobe -e "grant usage on *.* to tagsobe@localhost identified by 'tagsobe'"
@@ -33,6 +26,7 @@ export PATH="$PATH:$M2_HOME/bin"
 cd
 git clone git://github.com/martialsauvette/tagsobe-wicket-booking.git
 
+
 cd
 cd tagsobe-wicket-booking
 mvn clean install -Dmaven.test.skip=true
@@ -48,6 +42,12 @@ sleep 10
 cd
 mkdir log
 touch ~/log/run.log
+
+git clone git://github.com/martialsauvette/tagbrowser.git
+cd tagbrowser
+#get the revision for wicket
+#git checkout a56adc391225c0546d7c4e6173ace7e1c864f25a
+ant
 
 cd ~/tagbrowser/dist
 java  -Dfmt=java -jar tagsobe.jar http://localhost:8080/booking/ | tee ~/log/run.log
