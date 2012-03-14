@@ -46,7 +46,7 @@ touch ~/log/run.log
 git clone git://github.com/martialsauvette/tagbrowser.git
 cd tagbrowser
 #get the revision for wicket
-#git checkout a56adc391225c0546d7c4e6173ace7e1c864f25a
+git checkout f61dea2164ccc7a72ea7d15086ca5051b3e0b4ee
 ant
 
 cd ~/tagbrowser/dist

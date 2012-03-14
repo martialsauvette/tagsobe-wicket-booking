@@ -80,17 +80,19 @@ public class Register extends WebPage
 				setResponsePage(errorPage);
 			} else {
 				userDao.createUser(user);
-				try {
-					AuthenticatedWebSession.get().signIn(user.getUsername(),user.getPassword());
-					if (AuthenticatedWebSession.get().isSignedIn()) {
-						setResponsePage(Main.class);
-					} else {
-						setResponsePage(Home.class);
-					}
-				} catch (Exception e) {
-					error("Login failed");
-					e.printStackTrace();
-				}
+				setResponsePage(Home.class);
+//				try {
+//					AuthenticatedWebSession.get().signIn(user.getUsername(),user.getPassword());
+//					if (AuthenticatedWebSession.get().isSignedIn()) {
+//						setResponsePage(Main.class);						
+//					} else {
+//						error("Login failed");
+//						setResponsePage(Home.class);
+//					}
+//				} catch (Exception e) {
+//					error("Login failed");
+//					e.printStackTrace();
+//				}
 			}
 
 
