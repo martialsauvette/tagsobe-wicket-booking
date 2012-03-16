@@ -1,5 +1,6 @@
 package de.objectcode.data.dao.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -30,13 +31,14 @@ public class BookingDaoJPAImp  extends AbstractDaoJPAImpl<Booking> implements Bo
 
 	@Transactional
 	public List<Booking> findBookingsByUserId(final String userName) {
-		return getJpaTemplate().execute(new JpaCallback<List<Booking>>() {
-			public List<Booking> doInJpa(EntityManager em) throws PersistenceException {
-				TypedQuery<Booking> query = em.createQuery("select b from Booking b where b.user.username = :userName order by b.checkinDate", Booking.class);
-				query.setParameter("userName", userName);
-				return query.getResultList();
-			}
-		});
+		return new ArrayList<Booking>();
+//		return getJpaTemplate().execute(new JpaCallback<List<Booking>>() {
+//			public List<Booking> doInJpa(EntityManager em) throws PersistenceException {
+//				TypedQuery<Booking> query = em.createQuery("select b from Booking b where b.user.username = :userName order by b.checkinDate", Booking.class);
+//				query.setParameter("userName", userName);
+//				return query.getResultList();
+//			}
+//		});
 	}
 
 	public int countAll() {
