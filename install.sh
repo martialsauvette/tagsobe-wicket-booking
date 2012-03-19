@@ -57,4 +57,7 @@ sudo service tomcat6 stop
 mail -s "tagsobe tagsobe-wicket-booking result" sauvette@objectcode.de <  ~/log/run.log
 
 cd
+cp ~/tagsobe-wicket-booking/uninstall.sh .
+#sh uninstall.sh
+
 
